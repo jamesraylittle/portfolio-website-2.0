@@ -4,7 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="James Little's personal website where he describes himself, expresses his interests, goals, hobbies, etc.">
+	<meta name="description"
+		content="James Little's personal website where he describes himself, expresses his interests, goals, hobbies, etc.">
 	<meta name="author" content="James Little">
 	<title>Home | James Little</title>
 
@@ -24,7 +25,7 @@
 
 	<!-- Favicons -->
 	<!-- TODO: Favicon -->
-	
+
 	<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" sizes="180x180">
 	<link rel="icon" href="assets/img/favicon-32x32.png" sizes="32x32" type="image/png">
 	<link rel="icon" href="assets/img/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -32,7 +33,7 @@
 	<!--<link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#395B64">-->
 	<link rel="icon" href="assets/img/favicon.ico">
 	<meta name="theme-color" content="#395B64">
-	
+
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -41,12 +42,16 @@
 		<!-- Fixed navbar -->
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand d-flex align-items-center justify-content-lg-center justify-content-start" href="/">
-					<a class="branding me-5" href="#"><h1>James L.</h1></a>
+				<a class="navbar-brand d-flex align-items-center justify-content-lg-center justify-content-start"
+					href="/">
+					<a class="branding me-5" href="index.html">
+						<h1>James L.</h1>
+					</a>
 				</a>
 
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav-content"
-					aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#main-nav-content" aria-controls="navbarCollapse" aria-expanded="false"
+					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
@@ -54,7 +59,10 @@
 					<!-- Main Nav Links -->
 					<ul class="navbar-nav nav col col-lg-auto me-lg-auto mb-2 justify-content-start mb-md-0">
 						<li class="nav-item active">
-							<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#quotes">Quotes</a>
 						</li>
 					</ul>
 					<!-- Social Media Icons -->
@@ -84,37 +92,73 @@
 
 	<!-- Begin page content -->
 	<main class="flex-shrink-0">
-		<div class="container mt-5">
-			<div class="row justify-content-start">
-				<div class="col-auto">
-					<img class="thumbnail" id="self" src="assets/img/fancy_james.jpeg" alt="James Little in a suit." />
-				</div>
-				<div class="col-9">
-					<div class="row">
-						<div class="col">
-							<h1 class="display-6">About Me</h1>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<p>
-								My name is James Little. I am currently a software developer in Lubbock, Texas. I have a
-								B.S. in Computer Science and a minor in mathematics. I work with multiple languages on a
-								daily basis; including but not limited to C\C++, C#, Scala, Bash, Python. I have
-								extensive experience in system administration, networking, developer operations. I enjoy
-								writing eloquent solutions to complicated problems. I prefer tabs over spaces.
-							</p>
-						</div>
-					</div>
+		<div class="container mt-5" id="page-content">
+			<div id="#preloader" class="d-flex justify-content-center">
+				<div class="spinner-border" role="status">
+					<span class="visually-hidden">Loading...</span>
 				</div>
 			</div>
 		</div>
 	</main>
 
 	<!-- Java Scripts -->
-	<script>window.jQuery || document.write('<script src="assets/js/jquery-slim.min.js"><\/script>')</script>
-	<script src="assets/js/popper.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script>window.jQuery || document.write('<script src="assets/js/jquery.min.js"><\/script>')</script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			//Subscribe to changes to the hash portion of the URL.
+			window.addEventListener('hashchange', function () {
+				setContent(getCurrentPageName());
+			});
+
+			//Set Default Content
+			//1. Check if a hash value exists at the end of the URL
+			var page = getCurrentPageName();
+			if (page == null || page == undefined || page.length <= 0)
+				page = "home";
+
+			setContent(page);
+		});
+
+		//Loads the contents from a given HTML file
+		//from the pages directory. 
+		function setContent(page) {
+
+			if (page == null || page == undefined || page.length <= 0)
+				return;
+			$("#preloader").show();
+			$("#page-content").load(getFilePath(page), function (response, status, xhr) {
+				$("#preloader").hide();
+				if (status == "error") {
+					loadErrorPage(xhr.status, xhr.statusText);
+				}
+			});
+		}
+
+		function getCurrentPageName() {
+			return $(location).attr("hash").replace('#', '');
+		}
+
+		function getFilePath(pageName) {
+			return "pages/" + pageName + ".html";
+		}
+
+		function loadErrorPage(status, statusText) {
+			
+			$("#page-content").load(getFilePath("error"), function (e_response, e_status, e_xhr) {
+				if (status == "error") {
+					//Failed to Load the Error Page, some how
+					$("#page-content").html("Failed to Load Error Page :(");
+					return;
+				}
+				$("#errorMsg").html(status + " - " + statusText);
+			});
+		
+		}
+
+	</script>
 
 
 </body>

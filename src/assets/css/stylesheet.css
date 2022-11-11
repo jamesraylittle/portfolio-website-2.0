@@ -18,6 +18,11 @@ img#self {
 	max-width: 160px;
 	max-height: 160px;
 }
+span#errorMsg {
+	color: #FF0000;
+	font-weight: bold;
+}
+
 a.branding:link,
 a.branding:visited,
 a.branding {
