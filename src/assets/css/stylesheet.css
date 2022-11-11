@@ -8,31 +8,52 @@
 */
 
 body {
-    padding-top: 5rem;
-    background-color: #2C3333;
-    color: #FFFFFF;
+	padding-top: 5rem;
+	background-color: #2C3333;
+	color: #FFFFFF;
 }
 
 img#self {
-    border-radius: 5%;
-    max-width: 160px;
-    max-height: 160px;
+	border-radius: 5%;
+	max-width: 160px;
+	max-height: 160px;
 }
+a.branding:link,
+a.branding:visited,
+a.branding {
+	/*https://colorhunt.co/palette/393e466d9886f2e7d5f7f7f7*/
+	font-family: Pacifico;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 700;
+	color: #6e9797;
+	text-shadow: 3px 3px #2C3333;
+	text-decoration: none;
+}
+
+a.branding:hover,
+a.branding:active {
+	color: #A5C9CA;
+}
+
+
 
 /* Navigation */
 nav.bg-dark {
-    background-color: #395B64!important;
+	background-color: #395B64 !important;
 }
 
 /* Social Media Icons */
 a.social-icon {
-    font-size: 24px;
+	font-size: 24px;
 }
 
-a.social-icon:link, a.social-icon:visited {
-    color: #A5C9CA;
+a.social-icon:link,
+a.social-icon:visited {
+	color: #A5C9CA;
 }
 
-a.social-icon:hover, a.social-icon:active {
-    color: #E7F6F2;
+a.social-icon:hover,
+a.social-icon:active {
+	color: #E7F6F2;
 }
