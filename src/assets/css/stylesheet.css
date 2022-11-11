@@ -1,0 +1,38 @@
+/*
+    Stylesheet for jameslittle.org
+    Color Palatte: https://colorhunt.co/palette/2c3333395b64a5c9cae7f6f2
+    Darkest: #2C3333
+    Dark: #395B64
+    Light: #A5C9CA
+    Lightest: #E7F6F2
+*/
+
+body {
+    padding-top: 5rem;
+    background-color: #2C3333;
+    color: #FFFFFF;
+}
+
+img#self {
+    border-radius: 5%;
+    max-width: 160px;
+    max-height: 160px;
+}
+
+/* Navigation */
+nav.bg-dark {
+    background-color: #395B64!important;
+}
+
+/* Social Media Icons */
+a.social-icon {
+    font-size: 24px;
+}
+
+a.social-icon:link, a.social-icon:visited {
+    color: #A5C9CA;
+}
+
+a.social-icon:hover, a.social-icon:active {
+    color: #E7F6F2;
+}
