@@ -56,13 +56,13 @@
 					<!-- Main Nav Links -->
 					<ul class="navbar-nav nav col col-lg-auto me-lg-auto mb-2 justify-content-start mb-md-0">
 						<li class="nav-item active">
-							<a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+							<a class="nav-link" href="?p=home">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#resume">Resume</a>
+							<a class="nav-link" href="?p=resume">Resume</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#quotes">Quotes</a>
+							<a class="nav-link" href="?p=quotes">Quotes</a>
 						</li>
 					</ul>
 					<!-- Social Media Icons -->
@@ -90,10 +90,12 @@
 		</nav>
 	</header>
 
-	<!-- Begin page content -->
+	<!-- Main -->
 	<main class="flex-shrink-0">
+		<!-- Page Content -->
 		<div class="container mt-5" id="page-content">
-			<div id="#preloader" class="d-flex justify-content-center">
+			<!-- Pre Loader -->
+			<div class="text-center" id="preloader">
 				<div class="spinner-border" role="status">
 					<span class="visually-hidden">Loading...</span>
 				</div>
@@ -104,12 +106,13 @@
 	<!-- Java Scripts -->
 	<script>window.jQuery || document.write('<script src="assets/js/jquery.min.js"><\/script>')</script>
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/app.js"></script>
 
 	<script type="text/javascript">
 
 		$(document).ready(function () {
 			//Subscribe to changes to the hash portion of the URL.
-			window.addEventListener('hashchange', function () {
+			window.addEventListener('locationchange', function () {
 				setContent(getCurrentPageName());
 			});
 
@@ -122,54 +125,14 @@
 				page = "home";
 
 			setContent(page);
+
 		});
-
-		//Loads the contents from a given HTML file
-		//from the pages directory. 
-		function setContent(page) {
-
-			if (page == null || page == undefined || page.length <= 0)
-				return;
-			$("#preloader").show();
-			$("#page-content").load(getFilePath(page), function (response, status, xhr) {
-				if (status == "error") {
-					loadErrorPage(xhr.status, xhr.statusText);
-					return;
-				}
-				$("#preloader").hide();
-				var date = xhr.getResponseHeader('Date');
-			
-				$("#last-updated").html(date);
-
-			});
-		}
-
-		function getCurrentPageName() {
-			return $(location).attr("hash").replace('#', '');
-		}
-
-		function getFilePath(pageName) {
-			return "pages/" + pageName + ".html";
-		}
-
-		function loadErrorPage(status, statusText) {
-			
-			$("#page-content").load(getFilePath("error"), function (e_response, e_status, e_xhr) {
-				if (status == "error") {
-					//Failed to Load the Error Page, some how
-					$("#page-content").html("Failed to Load Error Page :(");
-					return;
-				}
-				$("#errorMsg").html(status + " - " + statusText);
-			});
-		
-		}
-
 	</script>
 
 	<footer class="footer mt-auto py-3 bg-dark">
 		<div class="container">
-			<span class="text-muted"><small>&copy; Copyright <span id="current-year"></span>, James Little</small> </span>
+			<span class="text-muted"><small>&copy; Copyright <span id="current-year"></span>, James Little</small>
+			</span>
 		</div>
 	</footer>
 
