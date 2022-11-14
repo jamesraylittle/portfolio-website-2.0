@@ -23,9 +23,6 @@
 	<link href="assets/css/stylesheet.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico" />
 
-	<!-- Favicons -->
-	<!-- TODO: Favicon -->
-
 	<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" sizes="180x180">
 	<link rel="icon" href="assets/img/favicon-32x32.png" sizes="32x32" type="image/png">
 	<link rel="icon" href="assets/img/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -60,6 +57,9 @@
 					<ul class="navbar-nav nav col col-lg-auto me-lg-auto mb-2 justify-content-start mb-md-0">
 						<li class="nav-item active">
 							<a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#resume">Resume</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#quotes">Quotes</a>
@@ -113,8 +113,10 @@
 				setContent(getCurrentPageName());
 			});
 
+			//Set Current Year in Footer for Copyright
+			$("#current-year").html(new Date().getFullYear());
+
 			//Set Default Content
-			//1. Check if a hash value exists at the end of the URL
 			var page = getCurrentPageName();
 			if (page == null || page == undefined || page.length <= 0)
 				page = "home";
@@ -130,10 +132,15 @@
 				return;
 			$("#preloader").show();
 			$("#page-content").load(getFilePath(page), function (response, status, xhr) {
-				$("#preloader").hide();
 				if (status == "error") {
 					loadErrorPage(xhr.status, xhr.statusText);
+					return;
 				}
+				$("#preloader").hide();
+				var date = xhr.getResponseHeader('Date');
+			
+				$("#last-updated").html(date);
+
 			});
 		}
 
@@ -159,6 +166,12 @@
 		}
 
 	</script>
+
+	<footer class="footer mt-auto py-3 bg-dark">
+		<div class="container">
+			<span class="text-muted"><small>&copy; Copyright <span id="current-year"></span>, James Little</small> </span>
+		</div>
+	</footer>
 
 
 </body>

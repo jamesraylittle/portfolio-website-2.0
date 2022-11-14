@@ -62,3 +62,14 @@ a.social-icon:hover,
 a.social-icon:active {
 	color: #E7F6F2;
 }
+
+.dark-list-group {
+	--bs-list-group-color: #fff;
+    --bs-list-group-bg: rgba(30,33,37)!important;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: 10px;
+
+}
