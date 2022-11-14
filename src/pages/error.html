@@ -29,5 +29,37 @@
 			</div>
 		</div>
 	</div>
-
 </div>
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+		const params = new URLSearchParams($(location).attr("search"));
+		var code = parseInt(params.get("c"));
+		var title = code;
+		var message = "";
+		switch (code) {
+			case 401:
+				message = "Unauthorized.";
+			break;
+
+			case 403:
+				message = "Forbidden.";
+			break;
+
+			case 404:
+				message = "Page Not Found.";
+			break;
+			case 500:
+				message = "Internal Server Error.";
+			default:
+				title = "Unknown";
+				message = "An Unknown Error Occured.";
+		}
+
+		$("#error-title").html(title);
+		$("#error-message").html(message);
+
+	});
+</script>

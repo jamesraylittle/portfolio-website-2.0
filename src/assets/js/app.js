@@ -43,8 +43,8 @@ function loadErrorPage(title, message) {
 
 
 function getCurrentPageName() {
-	return $(location).attr("search").replace("?p=", '');
-	//return $(location).attr("hash").replace('#', '');
+	const params = new URLSearchParams($(location).attr("search"));
+	return params.get("p");
 }
 
 function getFilePath(pageName, ext = ".html", directory = "pages/") {
