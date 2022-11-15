@@ -19,6 +19,18 @@ img#self {
 	max-height: 160px;
 }
 
+.img-showcase {
+	width: 700px;
+    aspect-ratio: auto 700 / 525;
+    height: 525px;
+}
+
+.img-vertical {
+	width: 500px;
+	aspect-ratio: auto 500 / 573;
+	height: 573px;
+}
+
 #error-title {
 	font-weight: bold;
 	font-size: 18pt;
