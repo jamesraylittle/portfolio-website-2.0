@@ -51,6 +51,11 @@ function getCurrentPageName() {
 
 function setCurrentNav() {
 	var loc = window.location.search;
+	if (loc == '') {
+		$("#default-nav").addClass("active");
+		return;
+	}
+
 	$(MAIN_NAV_ID).find("a.nav-link").each(function (){
 		$(this).toggleClass('active', $(this).attr('href') == loc);
 	});
