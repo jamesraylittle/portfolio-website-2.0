@@ -47,6 +47,17 @@ a.branding:active {
 	color: #A5C9CA;
 }
 
+a.nav-link.active,
+.navbar-link.active {
+	text-decoration: underline;
+}
+
+a.nav-link:hover {
+	color: #fff;
+	text-decoration:underline;
+	
+}
+
 /* Navigation */
 nav.bg-dark {
 	background-color: #395B64 !important;

@@ -5,6 +5,7 @@
 
 const PRELOADER_ID = "#preloader";
 const PAGE_CONTENT_ID = "#page-content";
+const MAIN_NAV_ID = "#main-nav";
 
 const ERROR_PAGE_FN = "error";
 const ERROR_TITLE_ID = "#error-title";
@@ -24,6 +25,8 @@ function setContent(page) {
 			loadErrorPage(xhr.status, xhr.statusText);
 			return;
 		}
+
+		setCurrentNav();
 		
 	});
 }
@@ -41,10 +44,17 @@ function loadErrorPage(title, message) {
 	});
 }
 
-
 function getCurrentPageName() {
 	const params = new URLSearchParams($(location).attr("search"));
 	return params.get("p");
+}
+
+function setCurrentNav() {
+	var loc = window.location.search;
+	$(MAIN_NAV_ID).find("a.nav-link").each(function (){
+		$(this).toggleClass('active', $(this).attr('href') == loc);
+	});
+
 }
 
 function getFilePath(pageName, ext = ".html", directory = "pages/") {
