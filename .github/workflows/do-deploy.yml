@@ -31,7 +31,7 @@ jobs:
           
       - name: Write VPN Files
         run: |
-          mkdir ~/.ssh
+          mkdir -p ~/.ssh
           echo "$OVPN" > .github/vpn.ovpn
           
       - name: Install Open VPN
