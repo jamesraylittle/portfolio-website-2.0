@@ -12,24 +12,19 @@ jobs:
   deployment:
     runs-on: ubuntu-latest
     environment: production
-    steps:
-      - name: Set Variables
-        uses: allenevans/set-env@v2.0.0
-        with:
-          OVPN: ${{secrets.OVPN_GITHUB}}
+    steps:          
+      - name: Create SSH key
+        env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-          SSH_HOST: ${{ secrets.HOST }}
-          
-      - name: Create SSH key
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           
       - name: Write VPN Files
+        env:
+          OVPN: ${{ secrets.OVPN_GITHUB }}
         run: |
           mkdir -p ~/.ssh
           echo "$OVPN" > github.ovpn
@@ -50,8 +45,12 @@ jobs:
           until ping -c1 "$SSH_HOST"; do sleep 2; done
           
       - name: SSH & Run Script
+        env:           
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_HOST: ${{ secrets.HOST }}
         run: |
-          ssh $SSH_USERNAME@$SSH_HOST -p$SSH_PORT '~/.gh-update.sh'
+          ssh "$SSH_USERNAME"@"$SSH_HOST" -p"$SSH_PORT" '~/.gh-update.sh'
           
       - name: Kill VPN Connection
         run: |
