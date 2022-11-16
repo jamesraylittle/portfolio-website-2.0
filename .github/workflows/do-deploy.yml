@@ -33,7 +33,7 @@ jobs:
         run: |
           sudo apt-get install openvpn
           
-      - name: Start Open VPN 3
+      - name: Create VPN Connection
         run: |
           sudo openvpn --config "github.ovpn" --log "vpn.log" --daemon
           
@@ -41,7 +41,6 @@ jobs:
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
-          echo Host: "$SSH_HOST"
           until ping -c1 "$SSH_HOST"; do sleep 2; done
           
       - name: SSH & Run Script
