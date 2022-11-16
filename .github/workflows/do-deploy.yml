@@ -18,7 +18,7 @@ jobs:
         with:
           OVPN: ${{secrets.OVPN_GITHUB}}
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}
+          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
           SSH_USERNAME: ${{secrets.SSH_USERNAME}}
           SSH_PORT: ${{secrets.SSH_PORT}}
           SSH_HOST: ${{secrets.HOST}}
