@@ -44,9 +44,30 @@ jobs:
           sudo apt update
           sudo apt install openvpn3
           
+      - name: Create .ovpn File
+        run: |
+          echo $OVPN_GITHUB >> github.ovpn
+          
       - name: Start Open VPN 3
         run: |
-          { echo user ; } | openvpn3 session-start --config .github/vpn.ovpn
+          openvpn3 session-start --config ".github.ovpn" --log "vpn.log" --daemon
+          
+      - name: Wait for VPN Connection
+        run: |
+          until ping -c1 $SSH_HOST; do sleep 2; done
+          
       - name: SSH & Run Script
         run: |
           ssh $SSH_USERNAME@$SSH_HOST -p$SSH_PORT '~/.gh-update.sh'
+          
+      - name: Kill VPN Connection
+        run: |
+          sudo chmod 777 vpn.log
+          sudo killall openvpn
+          
+      - name: Upload VPN logs
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: VPN logs
+          path: vpn.log
