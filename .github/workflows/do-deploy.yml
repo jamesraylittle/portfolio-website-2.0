@@ -32,7 +32,7 @@ jobs:
       - name: Write VPN Files
         run: |
           mkdir -p ~/.ssh
-          echo "$OVPN" > .github/vpn.ovpn
+          echo "$OVPN" > github.ovpn
           
       - name: Install Open VPN
         run: |
@@ -43,10 +43,6 @@ jobs:
           sudo wget -O /etc/apt/sources.list.d/openvpn3.list https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-bionic.list
           sudo apt update
           sudo apt install openvpn3
-          
-      - name: Create .ovpn File
-        run: |
-          echo $OVPN_GITHUB >> github.ovpn
           
       - name: Start Open VPN 3
         run: |
