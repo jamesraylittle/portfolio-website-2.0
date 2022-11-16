@@ -40,7 +40,7 @@ jobs:
           
       - name: Start Open VPN 3
         run: |
-          openvpn session-start --config ".github.ovpn" --log "vpn.log" --daemon
+          sudo openvpn --config "github.ovpn" --log "vpn.log" --daemon
           
       - name: Wait for VPN Connection
         run: |
