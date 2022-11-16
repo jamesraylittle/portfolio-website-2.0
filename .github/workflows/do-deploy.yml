@@ -50,7 +50,7 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
-          ssh "$SSH_USERNAME"@"$SSH_HOST" -p"$SSH_PORT" '~/.gh-update.sh'
+          ssh "$SSH_USERNAME"@"$SSH_HOST" -p"$SSH_PORT" '/home/$SSH_USERNAME/./gh-update.sh'
           
       - name: Kill VPN Connection
         run: |
