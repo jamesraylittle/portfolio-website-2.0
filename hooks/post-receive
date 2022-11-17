@@ -1,6 +1,0 @@
-#! /bin/sh
-$WORK_DIR=$JL_WORK_TREE
-$BRANCH=$JL_BRANCH
-
-# -q flag is for quiet
-GIT_WORK_TREE=$WORK_DIR git checkout -qf $JL_BRANCH
